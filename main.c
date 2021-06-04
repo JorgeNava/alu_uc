@@ -22,14 +22,27 @@
           15	 f  1111  1111  1111
 */
 // * alu(iA, iB, opCode, showBits)
+
+void use_alu(short op, unsigned iA, unsigned iB, int opCode, unsigned *rslt, unsigned *status, int showBits){
+  short i;
+  printf("OP-%d: \n",op);
+  alu(iA, iB, opCode, rslt, status, showBits);
+  printf("R: %u - %u\n",*rslt,toBits(*rslt));
+/*   printf("R: %u - ",*rslt);
+  show_bits(*rslt); */
+  printf("Status: "); 
+  for (i = 0; i < 5; ++i)
+      printf("%d", status[i]) ;
+}
+
 int main(){
   printf("=== CONTROL UNIT ===\n");  
-  printf("OP-1: \n");
-  int r;
-  r = alu(13, 1, 13, 1);
-  printf("R: %u",toBits(r));
-  //unsigned int rsltBit = toBits(r[0]);
-  //printf("%u - %u\n", r[0],rsltBit);
-  //show_bits(rslt);
-  //alu(5,2,0,1);
-}  
+  unsigned r, i;
+  unsigned *rslt = &r, status[5];
+
+  /* use_alu() 
+    short op, unsigned iA, unsigned iB, int opCode, 
+    unsigned *rslt, unsigned *status, int showBits
+  */
+  use_alu(1, -1, 1, 0, rslt, status, 1);
+}
